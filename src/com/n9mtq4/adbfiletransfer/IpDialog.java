@@ -16,70 +16,29 @@
 package com.n9mtq4.adbfiletransfer;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Will on 7/2/14.
  */
-public class IpDialog {
-	
-	private JFrame frame;
-	private JButton submit;
-	private JButton cancel;
-	private JPanel buttonPanel;
-	private JTextField ipField;
-	private JLabel label;
+public class IpDialog extends Dialog {
 	
 	public IpDialog() {
 		
-		gui();
+		super("Connect to IP", "Enter an IP to connect to.", "Connect", "Cancel");
 		
 	}
 	
-	public void gui() {
-		
-		frame = new JFrame("Connect to IP");
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		label = new JLabel("Enter an IP to connect to.");
-		ipField = new JTextField();
-		submit = new JButton("Connect");
-		cancel = new JButton("Cancel");
-		buttonPanel = new JPanel(new GridLayout(1, 2));
-		
-		buttonPanel.add(cancel);
-		buttonPanel.add(submit);
-		
-		frame.add(label, BorderLayout.NORTH);
-		frame.add(ipField, BorderLayout.CENTER);
-		frame.add(buttonPanel, BorderLayout.SOUTH);
-		
-		frame.pack();
-		frame.setSize(new Dimension(360, 90));
-		frame.setLocationRelativeTo(Gui.frame);
-		frame.setVisible(true);
-		
-		frame.getRootPane().setDefaultButton(submit);
-		submit.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				onButtonPress(submit);
-			}
-		});
-		cancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				onCancel();
-			}
-		});
-		
-	}
-	
+	/**
+	 * method is called when confirm button is pressed
+	 * <br>
+	 * NOTE: it is advised you dispose the JFrame (getFrame().dispose();)
+	 *
+	 * @param pressedButton button that is pressed
+	 */
+	@Override
 	public void onButtonPress(JButton pressedButton) {
 		
-		boolean b = ADB.connect(ipField.getText());
+		boolean b = ADB.connect(getTextField().getText());
 		
 		if (b) {
 			
@@ -89,23 +48,14 @@ public class IpDialog {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
 			new DeviceDisplay(ADB.devices());
-			new TextAreaWindow("Connect to IP", "Connected to " + ipField.getText(), Gui.frame);
-			frame.dispose();
+			new TextAreaWindow("Connect to IP", "Connected to " + getTextField().getText(), Gui.frame);
+			getFrame().dispose();
 			Files.refresh();
 			
 		}else {
-			
-			new TextAreaWindow("Connect to IP", "Failed to connect to " + ipField.getText(), Gui.frame);
-			
+			new TextAreaWindow("Connect to IP", "Failed to connect to " + getTextField().getText(), Gui.frame);
 		}
-		
-	}
-	
-	public void onCancel() {
-		
-		frame.dispose();
 		
 	}
 	

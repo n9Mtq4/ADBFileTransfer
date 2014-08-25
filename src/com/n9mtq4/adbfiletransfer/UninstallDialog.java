@@ -16,79 +16,32 @@
 package com.n9mtq4.adbfiletransfer;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Will on 7/5/14.
  */
-public class UninstallDialog {
-
-	private JFrame frame;
-	private JButton submit;
-	private JButton cancel;
-	private JPanel buttonPanel;
-	private JTextField ipField;
-	private JLabel label;
-
+public class UninstallDialog extends Dialog {
+	
 	public UninstallDialog() {
 		
-		gui();
+		super("Uninstall", "Enter a package name to uninstall.", "Uninstall", "Cancel");
 		
 	}
 	
-	public void gui() {
-		
-		frame = new JFrame("Uninstall");
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		label = new JLabel("Enter a package name to uninstall.");
-		ipField = new JTextField();
-		submit = new JButton("Uninstall");
-		cancel = new JButton("Cancel");
-		buttonPanel = new JPanel(new GridLayout(1, 2));
-		
-		buttonPanel.add(cancel);
-		buttonPanel.add(submit);
-		
-		frame.add(label, BorderLayout.NORTH);
-		frame.add(ipField, BorderLayout.CENTER);
-		frame.add(buttonPanel, BorderLayout.SOUTH);
-		
-		frame.pack();
-		frame.setSize(new Dimension(360, 90));
-		frame.setLocationRelativeTo(Gui.frame);
-		frame.setVisible(true);
-		
-		frame.getRootPane().setDefaultButton(submit);
-		submit.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				onButtonPress(submit);
-			}
-		});
-		cancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				onCancel();
-			}
-		});
-		
-	}
-
+	/**
+	 * method is called when confirm button is pressed
+	 * <br>
+	 * NOTE: it is advised you dispose the JFrame (getFrame().dispose();)
+	 *
+	 * @param pressedButton button that is pressed
+	 */
+	@Override
 	public void onButtonPress(JButton pressedButton) {
 		
-		String out = ADB.uninstall(ipField.getText());
+		String out = ADB.uninstall(getTextField().getText());
 		
-		new TextAreaWindow("Uninstall", out, this.frame);
-		frame.dispose();
-		
-	}
-	
-	public void onCancel() {
-		
-		frame.dispose();
+		new TextAreaWindow("Uninstall", out, getFrame());
+		getFrame().dispose();
 		
 	}
 	

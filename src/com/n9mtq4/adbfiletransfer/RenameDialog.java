@@ -16,81 +16,33 @@
 package com.n9mtq4.adbfiletransfer;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Will on 7/4/14.
  */
-public class RenameDialog {
+public class RenameDialog extends Dialog {
 	
-	private JFrame frame;
-	private JButton submit;
-	private JButton cancel;
-	private JPanel buttonPanel;
-	private JTextField textField;
-	private JLabel label;
+	private String oldFile;
 	
-	private String oFile;
-	
-	public RenameDialog(String oldName) {
+	public RenameDialog(String oldFile) {
 		
-		gui(oldName);
+		super("Rename", "Rename " + oldFile, "Rename", "Cancel");
+		this.oldFile = oldFile;
 		
 	}
 	
-	public void gui(String oldFile) {
-		
-		this.oFile = oldFile;
-		
-		frame = new JFrame("Rename");
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		label = new JLabel("Rename " + oldFile);
-		textField = new JTextField();
-		submit = new JButton("Rename");
-		cancel = new JButton("Cancel");
-		buttonPanel = new JPanel(new GridLayout(1, 2));
-		
-		buttonPanel.add(cancel);
-		buttonPanel.add(submit);
-		
-		frame.add(label, BorderLayout.NORTH);
-		frame.add(textField, BorderLayout.CENTER);
-		frame.add(buttonPanel, BorderLayout.SOUTH);
-		
-		frame.pack();
-		frame.setSize(new Dimension(360, 90));
-		frame.setLocationRelativeTo(Gui.frame);
-		frame.setVisible(true);
-		
-		frame.getRootPane().setDefaultButton(submit);
-		submit.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				onButtonPress(submit);
-			}
-		});
-		cancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				onCancel();
-			}
-		});
-		
-	}
-	
+	/**
+	 * method is called when confirm button is pressed
+	 * <br>
+	 * NOTE: it is advised you dispose the JFrame (getFrame().dispose();)
+	 *
+	 * @param pressedButton button that is pressed
+	 */
+	@Override
 	public void onButtonPress(JButton pressedButton) {
 		
-		Files.rename(oFile, textField.getText());
-		frame.dispose();
-		
-	}
-	
-	public void onCancel() {
-		
-		frame.dispose();
+		Files.rename(oldFile, getTextField().getText());
+		getFrame().dispose();
 		
 	}
 	

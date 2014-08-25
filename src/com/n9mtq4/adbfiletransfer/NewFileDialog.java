@@ -16,80 +16,33 @@
 package com.n9mtq4.adbfiletransfer;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Will on 7/4/14.
  */
-public class NewFileDialog {
-
-	private JFrame frame;
-	private JButton submit;
-	private JButton cancel;
-	private JPanel buttonPanel;
-	private JTextField ipField;
-	private JLabel label;
-
+public class NewFileDialog extends Dialog {
+	
 	private String fileP;
-
+	
 	public NewFileDialog(String filePath) {
 		
+		super("New File", "Enter a New File Name.", "Create", "Cancel");
 		this.fileP = filePath;
-		gui();
 		
 	}
-
-	public void gui() {
-		
-		frame = new JFrame("New File");
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		label = new JLabel("Enter a New File Name");
-		ipField = new JTextField();
-		submit = new JButton("Create");
-		cancel = new JButton("Cancel");
-		buttonPanel = new JPanel(new GridLayout(1, 2));
-		
-		buttonPanel.add(cancel);
-		buttonPanel.add(submit);
-		
-		frame.add(label, BorderLayout.NORTH);
-		frame.add(ipField, BorderLayout.CENTER);
-		frame.add(buttonPanel, BorderLayout.SOUTH);
-		
-		frame.pack();
-		frame.setSize(new Dimension(360, 90));
-		frame.setLocationRelativeTo(Gui.frame);
-		frame.setVisible(true);
-		
-		frame.getRootPane().setDefaultButton(submit);
-		submit.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				onButtonPress(submit);
-			}
-		});
-		cancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				onCancel();
-			}
-		});
-		
-	}
-
+	
+	/**
+	 * method is called when confirm button is pressed
+	 * <br>
+	 * NOTE: it is advised you dispose the JFrame (getFrame().dispose();)
+	 *
+	 * @param pressedButton button that is pressed
+	 */
+	@Override
 	public void onButtonPress(JButton pressedButton) {
 		
-		Files.newFile(fileP, ipField.getText());
-		frame.dispose();
-		
-	}
-
-	public void onCancel() {
-		
-		frame.dispose();
+		Files.newFile(fileP, getTextField().getText());
+		getFrame().dispose();
 		
 	}
 	
