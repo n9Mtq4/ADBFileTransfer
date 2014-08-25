@@ -47,102 +47,56 @@ public class Update {
 		}
 		
 	}
-
+	
 	public static String get(String url, String USER_AGENT) {
-
 		String htmlString = "";
-
 		URL obj = null;
-
 		try {
-
 			obj = new URL(url);
-
 		} catch (MalformedURLException e) {
-
 			e.printStackTrace();
-
 		}
-
 		HttpURLConnection con = null;
-
 		try {
-
 			con = (HttpURLConnection) obj.openConnection();
-
 		} catch (IOException e) {
-
 			e.printStackTrace();
-
 		}
-
 		try {
-
 			con.setRequestMethod("GET");
-
 		} catch (ProtocolException e) {
-
 			e.printStackTrace();
-
 		}
-
 		//add request header
 		con.setRequestProperty("User-Agent", USER_AGENT);
-
 		int responseCode = 0;
-
 		try {
-
 			responseCode = con.getResponseCode();
-
 		} catch (IOException e) {
-
 			e.printStackTrace();
-
 		}
-
 		BufferedReader in = null;
-
 		try {
-
 			in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
 		} catch (IOException e) {
-
 			e.printStackTrace();
-
 		}
-
 		String inputLine;
 		StringBuffer response = new StringBuffer();
-
 		try {
-
 			while ((inputLine = in.readLine()) != null) {
-
 				response.append(inputLine);
-
 			}
-
 		} catch (IOException e) {
-
 			e.printStackTrace();
-
 		}
-
 		try {
-
 			in.close();
-
 		} catch (IOException e) {
-
 			e.printStackTrace();
-
 		}
-
 		htmlString = response.toString();
 		return htmlString;
-
 	}
 	
 }
