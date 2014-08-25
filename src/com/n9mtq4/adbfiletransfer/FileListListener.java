@@ -49,7 +49,7 @@ public class FileListListener extends MouseAdapter {
 				
 			}
 			
-			if (typeName.equalsIgnoreCase("folder")) {
+			if (typeName.equalsIgnoreCase("folder") || typeName.equalsIgnoreCase("mounted")) {
 				
 				Files.navTo(Files.getCurrentPath() + fileName);
 				
