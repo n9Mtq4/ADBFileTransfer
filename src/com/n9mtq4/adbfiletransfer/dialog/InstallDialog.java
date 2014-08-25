@@ -13,56 +13,58 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer;
+package com.n9mtq4.adbfiletransfer.dialog;
+
+import com.n9mtq4.adbfiletransfer.ADB;
+import com.n9mtq4.adbfiletransfer.Gui;
+import com.n9mtq4.adbfiletransfer.Message;
+import com.n9mtq4.adbfiletransfer.TextAreaWindow;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
 /**
- * Created by Will on 7/4/14.
+ * Created by Will on 7/5/14.
  */
-public class PullDialog {
-	
+public class InstallDialog {
+
 	private JFrame frame;
 	private JTextField local;
-	private JTextField remote;
 	private JButton cancel;
 	private JButton ok;
 	private JButton browse;
 	private JPanel mainPanel;
 	private JPanel conPanel;
 	private JScrollPane scroll;
-
-	public PullDialog(String remotePath, String remoteName) {
+	
+	public InstallDialog() {
 		
-		gui(remotePath, remoteName, System.getProperty("user.home"));
+		gui(System.getProperty("user.home"));
 		
 	}
 	
-	public void gui(String remotePath, String remoteName, String localPath) {
+	public void gui(String localPath) {
 		
-		frame = new JFrame("Pull File");
+		frame = new JFrame("Install apk");
 		
 		local = new JTextField(localPath);
-		remote = new JTextField(remotePath + remoteName);
 		cancel = new JButton("Cancel");
-		ok = new JButton("OK");
-		browse = new JButton("Browse local files");
+		ok = new JButton("Install");
+		browse = new JButton("Browse apk files");
 		
-		mainPanel = new JPanel(new GridLayout(6, 1));
+		mainPanel = new JPanel(new GridLayout(4, 1));
 		conPanel = new JPanel(new GridLayout(1 , 2));
 		
 		conPanel.add(cancel);
 		conPanel.add(ok);
 		
-		mainPanel.add(new JLabel("Local file:"));
+		mainPanel.add(new JLabel("Apk file:"));
 		mainPanel.add(local);
 		mainPanel.add(browse);
-		mainPanel.add(new JLabel("Remote file:"));
-		mainPanel.add(remote);
 		mainPanel.add(conPanel);
 		
 		scroll = new JScrollPane(mainPanel);
@@ -70,7 +72,7 @@ public class PullDialog {
 		frame.add(scroll);
 		
 		frame.pack();
-		frame.setSize(new Dimension(320, 200));
+		frame.setSize(new Dimension(320, 140));
 		frame.setLocationRelativeTo(Gui.frame);
 		frame.setVisible(true);
 		
@@ -95,17 +97,16 @@ public class PullDialog {
 		});
 		
 	}
-
+	
 	public void onOk() {
 		
 		String localPath = getLocal().getText();
-		String remotePath = getRemote().getText();
 		
-		Message m = new Message("Pull", "Pulling file...");
-		String out = ADB.pull(remotePath, localPath);
+		Message m = new Message("Install", "Installing package...");
+		String out = ADB.install(localPath);
 		m.close();
 		
-		new TextAreaWindow("Pull", out, this.frame);
+		new TextAreaWindow("Install", out, this.frame);
 		frame.dispose();
 		
 	}
@@ -119,7 +120,9 @@ public class PullDialog {
 	public void onBrowse() {
 		
 		JFileChooser fileChooser = new JFileChooser();
-		int returnInt = fileChooser.showSaveDialog(this.frame);
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Android Package Files - .apk", "apk", "android package");
+		fileChooser.setFileFilter(filter);
+		int returnInt = fileChooser.showOpenDialog(this.frame);
 		
 		if (returnInt == JFileChooser.APPROVE_OPTION) {
 			
@@ -130,17 +133,11 @@ public class PullDialog {
 		}
 		
 	}
-
+	
 	public JTextField getLocal() {
-
+		
 		return local;
-
-	}
-
-	public JTextField getRemote() {
-
-		return remote;
-
+		
 	}
 	
 }

@@ -56,7 +56,7 @@ public class Main {
 					}
 				}
 			} catch (Exception e) {
-//				if Nimbus is not available
+//				if Nimbus is not available - don't do anything
 			}
 		}
 		
@@ -89,8 +89,8 @@ public class Main {
 		}
 		
 		if (!Update.isCurrent()) {
-//			available
 			
+//			available
 			new TextAreaWindow("Update", "There is an update available\nhttps://sites.google.com/site/adbfiletransfer/", Gui.frame);
 			
 		}

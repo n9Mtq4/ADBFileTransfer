@@ -13,18 +13,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer;
+package com.n9mtq4.adbfiletransfer.dialog;
+
+import com.n9mtq4.adbfiletransfer.Files;
 
 import javax.swing.*;
 
 /**
  * Created by Will on 7/4/14.
  */
-public class GotoDialog extends Dialog {
+public class NewFolderDialog extends Dialog {
 	
-	public GotoDialog() {
+	private String fileP;
+	
+	public NewFolderDialog(String filePath) {
 		
-		super("Goto Folder", "Enter a path to goto.", "Goto", "Cancel");
+		super("New Folder", "Enter a New Folder Name", "Create", "Cancel");
+		this.fileP = filePath;
 		
 	}
 	
@@ -38,13 +43,7 @@ public class GotoDialog extends Dialog {
 	@Override
 	public void onButtonPress(JButton pressedButton) {
 		
-		String path = getTextField().getText();
-		if (!path.endsWith("/")) {
-			
-			path = path + "/";
-			
-		}
-		Files.navTo(path);
+		Files.newFolder(fileP, getTextField().getText());
 		getFrame().dispose();
 		
 	}

@@ -13,7 +13,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer;
+package com.n9mtq4.adbfiletransfer.listener;
+
+import com.n9mtq4.adbfiletransfer.*;
+import com.n9mtq4.adbfiletransfer.dialog.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

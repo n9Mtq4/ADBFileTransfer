@@ -13,18 +13,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer;
+package com.n9mtq4.adbfiletransfer.dialog;
+
+import com.n9mtq4.adbfiletransfer.Files;
 
 import javax.swing.*;
 
 /**
- * Created by Will on 7/5/14.
+ * Created by Will on 7/4/14.
  */
-public class UninstallDialog extends Dialog {
+public class GotoDialog extends Dialog {
 	
-	public UninstallDialog() {
+	public GotoDialog() {
 		
-		super("Uninstall", "Enter a package name to uninstall.", "Uninstall", "Cancel");
+		super("Goto Folder", "Enter a path to goto.", "Goto", "Cancel");
 		
 	}
 	
@@ -38,9 +40,13 @@ public class UninstallDialog extends Dialog {
 	@Override
 	public void onButtonPress(JButton pressedButton) {
 		
-		String out = ADB.uninstall(getTextField().getText());
-		
-		new TextAreaWindow("Uninstall", out, getFrame());
+		String path = getTextField().getText();
+		if (!path.endsWith("/")) {
+			
+			path = path + "/";
+			
+		}
+		Files.navTo(path);
 		getFrame().dispose();
 		
 	}

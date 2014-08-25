@@ -13,7 +13,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer;
+package com.n9mtq4.adbfiletransfer.listener;
+
+import com.n9mtq4.adbfiletransfer.Debug;
+import com.n9mtq4.adbfiletransfer.Files;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;

@@ -13,21 +13,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer;
+package com.n9mtq4.adbfiletransfer.dialog;
+
+import com.n9mtq4.adbfiletransfer.*;
 
 import javax.swing.*;
 
 /**
- * Created by Will on 7/4/14.
+ * Created by Will on 7/2/14.
  */
-public class NewFolderDialog extends Dialog {
+public class IpDialog extends Dialog {
 	
-	private String fileP;
-	
-	public NewFolderDialog(String filePath) {
+	public IpDialog() {
 		
-		super("New Folder", "Enter a New Folder Name", "Create", "Cancel");
-		this.fileP = filePath;
+		super("Connect to IP", "Enter an IP to connect to.", "Connect", "Cancel");
 		
 	}
 	
@@ -41,8 +40,24 @@ public class NewFolderDialog extends Dialog {
 	@Override
 	public void onButtonPress(JButton pressedButton) {
 		
-		Files.newFolder(fileP, getTextField().getText());
-		getFrame().dispose();
+		boolean b = ADB.connect(getTextField().getText());
+		
+		if (b) {
+			
+//			gives time for device to authorize
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			new DeviceDisplay(ADB.devices());
+			new TextAreaWindow("Connect to IP", "Connected to " + getTextField().getText(), Gui.frame);
+			getFrame().dispose();
+			Files.refresh();
+			
+		}else {
+			new TextAreaWindow("Connect to IP", "Failed to connect to " + getTextField().getText(), Gui.frame);
+		}
 		
 	}
 	
