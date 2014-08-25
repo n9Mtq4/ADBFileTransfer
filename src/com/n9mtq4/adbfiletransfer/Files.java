@@ -176,24 +176,124 @@ public class Files {
 		
 	}
 	
-	public static Object[][] getFilesAt(String filePath) {
+	private static String getBefore(String string, String pattern) {
+		
+		int index = string.indexOf(pattern);
+		if (index == -1) {
+			return "";
+		}
+		
+		try {
+			
+			return string.substring(0, index);
+			
+		}catch (StringIndexOutOfBoundsException e) {
+			
+			return "";
+			
+		}
+		
+	}
+	
+	private static String getLastStringParts(int startIndex, String before) {
+		String cache = before;
+		for (int word = 0; word < startIndex; word++) {
+			try {
+				String sub = cache.trim().split(" ", 2)[1];
+				cache = sub;
+			}catch (StringIndexOutOfBoundsException e) {
+				return null;
+			}
+		}
+		return cache;
+	}
+	
+	private static int getType(String lsline, String seperator) {
+		
+		String[] list = lsline.split(seperator);
+		
+		if (list.length > 5) {
+			
+			if (list[3].contains("-")) {
+				
+				if (lsline.contains("->")) {
+					
+//					shortcut
+					return 2;
+					
+				}else {
+					
+//					folder
+					return 0;
+					
+				}
+				
+			}
+			
+			try {
+				
+				Integer.parseInt(list[3]);
+//				file
+				return 1;
+				
+			}catch (NumberFormatException e) {
+				
+//				unknown
+				return -1;
+				
+			}
+			
+		}
+		
+//		unknown
+		return -1;
+		
+	}
+	
+	private static String getAdjustedFilePath(String filePath) {
+		
+		try {
+			
+			String[] list = filePath.split(" ");
+			String out = "";
+			for (String s : list) {
+				
+				out += s + "\\ ";
+				
+			}
+			
+			out = out.substring(0, out.length() - 2);
+			Debug.print(out);
+			return out;
+			
+		}catch (StringIndexOutOfBoundsException e) {
+			
+			return filePath;
+			
+		}
+		
+	}
+	
+	public static Object[][] getFilesAt(String filePath1) {
 		
 		String out = "";
+		String filePath = getAdjustedFilePath(filePath1);
 		
 		if (Global.SHOW_HIDDEN_FILES) {
 			
-			out = ADB.rShell("ls -al " + Files.getCurrentPath());
+			out = ADB.rShell("ls -al " + filePath);
 			
 		}else {
 			
-			out = ADB.rShell("ls -l " + Files.getCurrentPath());
+			out = ADB.rShell("ls -l " + filePath);
 			
 		}
 		
 		if (out.contains("No such file or directory")) {
 			
-			Files.navTo("/sdcard/");
-			new TextAreaWindow("Error", "No sush file or directory", Gui.frame);
+			Files.navTo(upOne(currentPath));
+			new TextAreaWindow("Error", "No such file or directory", Gui.frame);
+			return Files.getFilesAt(currentPath);
 			
 		}
 		
@@ -219,11 +319,11 @@ public class Files {
 			String l = line.replaceAll("\\s+", "\t");
 			String[] list = l.split("\t");
 			
-			if (list.length == 6) {
+			if (getType(l, "\t") == 0) {
 				
 //				folder
 				String perm = list[0];
-				String name = list[5];
+				String name = getLastStringParts(5, line);
 				String date = list[3];
 				String time = list[4];
 				String dateTime = date + " " + time;
@@ -237,12 +337,12 @@ public class Files {
 				
 				objectList.add(ar1);
 				
-			}else if (list.length == 7) {
+			}else if (getType(l, "\t") == 1) {
 				
 //				file
 				String perm = list[0];
 				String size = list[3];
-				String name = list[6];
+				String name = getLastStringParts(6, line);
 				String date = list[4];
 				String time = list[5];
 				String dateTime = date + " " + time;
@@ -254,6 +354,24 @@ public class Files {
 				
 				ar1.add(name);
 				ar1.add(size);
+				ar1.add(dateTime);
+				ar1.add(perm);
+				ar1.add(extension);
+				
+				objectList.add(ar1);
+				
+			}else if (getType(l, "\t") == 2) {
+				
+//				shortcut or mounted disc
+				String perm = list[0];
+				String name = getBefore(getLastStringParts(5, line), " ->");
+				String date = list[3];
+				String time = list[4];
+				String dateTime = date + " " + time;
+				String extension = "mounted";
+				
+				ar1.add(name + "/");
+				ar1.add("");
 				ar1.add(dateTime);
 				ar1.add(perm);
 				ar1.add(extension);
