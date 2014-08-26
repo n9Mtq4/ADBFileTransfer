@@ -19,16 +19,16 @@ package com.n9mtq4.adbfiletransfer;
  * Created by Will on 6/30/14.
  */
 public class Source {
-
+	
 	public String sourceText = "";
-
+	
 	public Source(Object actionSource) {
 		
 //		GetSource constructor
 		sourceText = actionSource.toString();
 		
 	}
-
+	
 	public String getText() {
 		
 		int x = sourceText.indexOf(",text=") + ",text=".length();
