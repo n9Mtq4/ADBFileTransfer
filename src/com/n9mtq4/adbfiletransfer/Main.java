@@ -76,7 +76,7 @@ public class Main {
 			
 		}
 		
-		if (!Install.isADB()) {
+		if (!Install.hasADB()) {
 			
 			new Install();
 			

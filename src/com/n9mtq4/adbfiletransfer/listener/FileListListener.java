@@ -26,7 +26,7 @@ import java.awt.event.MouseEvent;
  * Created by Will on 7/4/14.
  */
 public class FileListListener extends MouseAdapter {
-
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
@@ -61,7 +61,7 @@ public class FileListListener extends MouseAdapter {
 		}
 		
 	}
-
+	
 	@Override
 	public void mouseReleased(MouseEvent mouseEvent) {
 		

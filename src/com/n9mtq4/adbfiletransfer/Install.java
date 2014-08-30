@@ -26,7 +26,7 @@ public class Install {
 		
 	}
 	
-	public static boolean isADB() {
+	public static boolean hasADB() {
 		
 		Shell shell = new Shell();
 		String[] cmd = {"adb", "version"};
