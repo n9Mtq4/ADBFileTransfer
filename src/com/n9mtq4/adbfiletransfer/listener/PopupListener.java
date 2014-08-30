@@ -18,12 +18,12 @@ package com.n9mtq4.adbfiletransfer.listener;
 import com.n9mtq4.adbfiletransfer.Debug;
 import com.n9mtq4.adbfiletransfer.Files;
 import com.n9mtq4.adbfiletransfer.Gui;
-import com.n9mtq4.adbfiletransfer.Source;
 import com.n9mtq4.adbfiletransfer.dialog.NewFileDialog;
 import com.n9mtq4.adbfiletransfer.dialog.NewFolderDialog;
 import com.n9mtq4.adbfiletransfer.dialog.PullDialog;
 import com.n9mtq4.adbfiletransfer.dialog.RenameDialog;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -35,7 +35,7 @@ public class PopupListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		
-		Source source = new Source(actionEvent.getSource());
+		JMenuItem source = (JMenuItem) actionEvent.getSource();
 		String text = source.getText();
 		
 		int row = Gui.fileList.getSelectedRow();

@@ -18,6 +18,7 @@ package com.n9mtq4.adbfiletransfer.listener;
 import com.n9mtq4.adbfiletransfer.*;
 import com.n9mtq4.adbfiletransfer.dialog.*;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,7 +30,7 @@ public class MenuListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		
-		Source source = new Source(actionEvent.getSource());
+		JMenuItem source = (JMenuItem) actionEvent.getSource();
 		String text = source.getText();
 		
 		if (text.equalsIgnoreCase("start server")) {
@@ -77,7 +78,6 @@ public class MenuListener implements ActionListener{
 		}else if (text.equalsIgnoreCase("goto")) {
 			
 			new GotoDialog();
-			
 			
 		}else if (text.equalsIgnoreCase("pull")) {
 			
