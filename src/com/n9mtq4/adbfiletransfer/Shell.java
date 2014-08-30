@@ -243,7 +243,53 @@ public class Shell implements Runnable{
 			
 			return "CritERROR!!!";
 			
+		}
+		
 	}
+
+	public String sendShellCommand(String cmd) {
+		
+		Debug.printCMD(cmd);
+		String AllText = "";
+		try {
+			
+			String line;
+			Process process = new ProcessBuilder(cmd).start();
+			BufferedReader STDOUT = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			BufferedReader STDERR = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+			
+			try {
+				
+				process.waitFor();
+				
+			} catch (InterruptedException ex) {
+				
+			}
+			
+			while ((line = STDERR.readLine()) != null) {
+				
+				AllText = AllText + "\n" + line;
+				
+			}
+			
+			while ((line = STDOUT.readLine()) != null) {
+				
+				AllText = AllText + "\n" + line;
+				while ((line = STDERR.readLine()) != null) {
+					
+					AllText = AllText + "\n" + line;
+					
+				}
+				
+			}
+			
+			Debug.print(AllText);
+			return AllText;
+		} catch (IOException ex) {
+			
+			return "CritERROR!!!";
+			
+		}
 		
 	}
 	
