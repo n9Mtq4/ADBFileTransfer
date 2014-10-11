@@ -42,7 +42,7 @@ public class Install {
 		}else {
 			
 			System.out.println("ADB verification error");
-			return false;
+			return true;
 			
 		}
 		
