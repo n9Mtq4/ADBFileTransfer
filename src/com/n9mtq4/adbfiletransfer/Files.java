@@ -149,7 +149,7 @@ public class Files {
 	
 	public static void setCopyPath(String newPath) {
 		
-		copyPath = newPath;
+		copyPath = getAdjustedFilePath(newPath);
 		
 	}
 	
