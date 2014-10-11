@@ -249,7 +249,7 @@ public class Shell implements Runnable{
 
 	public String sendShellCommand(String cmd) {
 		
-		Debug.printCMD(cmd);
+		Debug.print(cmd);
 		String AllText = "";
 		try {
 			
