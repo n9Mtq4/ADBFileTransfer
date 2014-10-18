@@ -15,6 +15,11 @@
 
 package com.n9mtq4.adbfiletransfer;
 
+import com.n9mtq4.adbfiletransfer.gui.DeviceDisplay;
+import com.n9mtq4.adbfiletransfer.gui.Gui;
+import com.n9mtq4.adbfiletransfer.gui.Message;
+import com.n9mtq4.adbfiletransfer.gui.TextAreaWindow;
+
 import javax.swing.*;
 
 /**
@@ -22,7 +27,7 @@ import javax.swing.*;
  */
 public class Main {
 	
-	public static int version = 3;
+	public static int version = 4;
 	
 	public static void main(String[] args) {
 		

@@ -13,41 +13,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer.dialog;
+package com.n9mtq4.adbfiletransfer.gui;
 
-import com.n9mtq4.adbfiletransfer.Files;
-
-import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Created by Will on 7/4/14.
  */
-public class GotoDialog extends Dialog {
+public class FileListModel extends DefaultTableModel {
 	
-	public GotoDialog() {
+	public FileListModel(Object[][] objects, Object[] objects2) {
 		
-		super("Goto Folder", "Enter a path to goto.", "Goto", "Cancel");
+		super(objects, objects2);
 		
 	}
 	
-	/**
-	 * method is called when confirm button is pressed
-	 * <br>
-	 * NOTE: it is advised you dispose the JFrame (getFrame().dispose();)
-	 *
-	 * @param pressedButton button that is pressed
-	 */
 	@Override
-	public void onButtonPress(JButton pressedButton) {
+	public boolean isCellEditable(int row, int column) {
 		
-		String path = getTextField().getText();
-		if (!path.endsWith("/")) {
-			
-			path = path + "/";
-			
-		}
-		Files.navTo(path);
-		getFrame().dispose();
+		return false;
 		
 	}
 	

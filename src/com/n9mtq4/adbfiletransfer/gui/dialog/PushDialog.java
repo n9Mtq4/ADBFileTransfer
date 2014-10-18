@@ -13,12 +13,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer.dialog;
+package com.n9mtq4.adbfiletransfer.gui.dialog;
 
 import com.n9mtq4.adbfiletransfer.ADB;
-import com.n9mtq4.adbfiletransfer.Gui;
-import com.n9mtq4.adbfiletransfer.Message;
-import com.n9mtq4.adbfiletransfer.TextAreaWindow;
+import com.n9mtq4.adbfiletransfer.gui.Gui;
+import com.n9mtq4.adbfiletransfer.gui.Message;
+import com.n9mtq4.adbfiletransfer.gui.TextAreaWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,9 +27,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 /**
- * Created by Will on 7/4/14.
+ * Created by Will on 6/30/14.
  */
-public class PullDialog {
+public class PushDialog {
 	
 	private JFrame frame;
 	private JTextField local;
@@ -40,19 +40,25 @@ public class PullDialog {
 	private JPanel mainPanel;
 	private JPanel conPanel;
 	private JScrollPane scroll;
-
-	public PullDialog(String remotePath, String remoteName) {
+	
+	public PushDialog(String remotePath) {
 		
-		gui(remotePath, remoteName, System.getProperty("user.home"));
+		gui("Push File", System.getProperty("user.home"), remotePath);
 		
 	}
 	
-	public void gui(String remotePath, String remoteName, String localPath) {
+	public PushDialog(String title, String localPath, String remotePath) {
 		
-		frame = new JFrame("Pull File");
+		gui(title, localPath, remotePath);
+		
+	}
+	
+	public void gui(String title, String localPath, String remotePath) {
+		
+		frame = new JFrame(title);
 		
 		local = new JTextField(localPath);
-		remote = new JTextField(remotePath + remoteName);
+		remote = new JTextField(remotePath);
 		cancel = new JButton("Cancel");
 		ok = new JButton("OK");
 		browse = new JButton("Browse local files");
@@ -78,7 +84,7 @@ public class PullDialog {
 		frame.setSize(new Dimension(320, 200));
 		frame.setLocationRelativeTo(Gui.frame);
 		frame.setVisible(true);
-		
+
 		frame.getRootPane().setDefaultButton(ok);
 		cancel.addActionListener(new ActionListener() {
 			@Override
@@ -100,17 +106,17 @@ public class PullDialog {
 		});
 		
 	}
-
+	
 	public void onOk() {
 		
 		String localPath = getLocal().getText();
 		String remotePath = getRemote().getText();
 		
-		Message m = new Message("Pull", "Pulling file...");
-		String out = ADB.pull(remotePath, localPath);
+		Message m = new Message("Push", "Pushing file...");
+		String out = ADB.push(localPath, remotePath);
 		m.close();
 		
-		new TextAreaWindow("Pull", out, this.frame);
+		new TextAreaWindow("Push", out, this.frame);
 		frame.dispose();
 		
 	}
@@ -124,28 +130,28 @@ public class PullDialog {
 	public void onBrowse() {
 		
 		JFileChooser fileChooser = new JFileChooser();
-		int returnInt = fileChooser.showSaveDialog(this.frame);
+		int returnInt = fileChooser.showOpenDialog(this.frame);
 		
 		if (returnInt == JFileChooser.APPROVE_OPTION) {
 			
 			File file = fileChooser.getSelectedFile();
 			
+			remote.setText(remote.getText() + file.getName());
 			local.setText(file.getPath());
 			
 		}
 		
 	}
-
+	
 	public JTextField getLocal() {
-
+		
 		return local;
-
-	}
-
-	public JTextField getRemote() {
-
-		return remote;
-
+		
 	}
 	
+	public JTextField getRemote() {
+		
+		return remote;
+		
+	}
 }

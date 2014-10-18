@@ -15,6 +15,9 @@
 
 package com.n9mtq4.adbfiletransfer;
 
+import com.n9mtq4.adbfiletransfer.gui.Gui;
+import com.n9mtq4.adbfiletransfer.gui.TextAreaWindow;
+
 import java.util.ArrayList;
 
 /**

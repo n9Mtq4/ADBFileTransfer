@@ -15,6 +15,8 @@
 
 package com.n9mtq4.adbfiletransfer;
 
+import com.n9mtq4.adbfiletransfer.lib.Shell;
+
 /**
  * Created by Will on 6/30/14.
  */

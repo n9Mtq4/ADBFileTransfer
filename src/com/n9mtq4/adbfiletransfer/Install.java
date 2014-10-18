@@ -15,6 +15,9 @@
 
 package com.n9mtq4.adbfiletransfer;
 
+import com.n9mtq4.adbfiletransfer.gui.TextAreaWindow;
+import com.n9mtq4.adbfiletransfer.lib.Shell;
+
 /**
  * Created by Will on 7/5/14.
  */

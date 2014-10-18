@@ -13,8 +13,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer;
+package com.n9mtq4.adbfiletransfer.gui;
 
+import com.n9mtq4.adbfiletransfer.ADB;
+import com.n9mtq4.adbfiletransfer.Debug;
+import com.n9mtq4.adbfiletransfer.Files;
+import com.n9mtq4.adbfiletransfer.lib.FileDrop;
 import com.n9mtq4.adbfiletransfer.listener.FileListListener;
 import com.n9mtq4.adbfiletransfer.listener.MenuListener;
 import com.n9mtq4.adbfiletransfer.listener.PopupListener;

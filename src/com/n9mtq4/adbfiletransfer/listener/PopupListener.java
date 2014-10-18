@@ -17,11 +17,11 @@ package com.n9mtq4.adbfiletransfer.listener;
 
 import com.n9mtq4.adbfiletransfer.Debug;
 import com.n9mtq4.adbfiletransfer.Files;
-import com.n9mtq4.adbfiletransfer.Gui;
-import com.n9mtq4.adbfiletransfer.dialog.NewFileDialog;
-import com.n9mtq4.adbfiletransfer.dialog.NewFolderDialog;
-import com.n9mtq4.adbfiletransfer.dialog.PullDialog;
-import com.n9mtq4.adbfiletransfer.dialog.RenameDialog;
+import com.n9mtq4.adbfiletransfer.gui.Gui;
+import com.n9mtq4.adbfiletransfer.gui.dialog.NewFileDialog;
+import com.n9mtq4.adbfiletransfer.gui.dialog.NewFolderDialog;
+import com.n9mtq4.adbfiletransfer.gui.dialog.PullDialog;
+import com.n9mtq4.adbfiletransfer.gui.dialog.RenameDialog;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

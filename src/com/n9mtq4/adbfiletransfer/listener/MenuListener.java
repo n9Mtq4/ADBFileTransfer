@@ -16,7 +16,12 @@
 package com.n9mtq4.adbfiletransfer.listener;
 
 import com.n9mtq4.adbfiletransfer.*;
-import com.n9mtq4.adbfiletransfer.dialog.*;
+import com.n9mtq4.adbfiletransfer.gui.dialog.*;
+import com.n9mtq4.adbfiletransfer.gui.dialog.dialog.*;
+import com.n9mtq4.adbfiletransfer.gui.DeviceDisplay;
+import com.n9mtq4.adbfiletransfer.gui.Gui;
+import com.n9mtq4.adbfiletransfer.gui.Message;
+import com.n9mtq4.adbfiletransfer.gui.TextAreaWindow;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

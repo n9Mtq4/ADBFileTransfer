@@ -18,7 +18,9 @@
 * https://github.com/adamoutler/CASUAL/
 * */
 
-package com.n9mtq4.adbfiletransfer;
+package com.n9mtq4.adbfiletransfer.lib;
+
+import com.n9mtq4.adbfiletransfer.Debug;
 
 import java.io.BufferedReader;
 import java.io.IOException;

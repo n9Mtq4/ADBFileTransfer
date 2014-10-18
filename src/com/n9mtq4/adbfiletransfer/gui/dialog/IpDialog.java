@@ -13,21 +13,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer.dialog;
+package com.n9mtq4.adbfiletransfer.gui.dialog;
 
-import com.n9mtq4.adbfiletransfer.ADB;
-import com.n9mtq4.adbfiletransfer.TextAreaWindow;
+import com.n9mtq4.adbfiletransfer.*;
+import com.n9mtq4.adbfiletransfer.gui.DeviceDisplay;
+import com.n9mtq4.adbfiletransfer.gui.Gui;
+import com.n9mtq4.adbfiletransfer.gui.TextAreaWindow;
 
 import javax.swing.*;
 
 /**
- * Created by Will on 7/5/14.
+ * Created by Will on 7/2/14.
  */
-public class UninstallDialog extends Dialog {
+public class IpDialog extends Dialog {
 	
-	public UninstallDialog() {
+	public IpDialog() {
 		
-		super("Uninstall", "Enter a package name to uninstall.", "Uninstall", "Cancel");
+		super("Connect to IP", "Enter an IP to connect to.", "Connect", "Cancel");
 		
 	}
 	
@@ -41,10 +43,24 @@ public class UninstallDialog extends Dialog {
 	@Override
 	public void onButtonPress(JButton pressedButton) {
 		
-		String out = ADB.uninstall(getTextField().getText());
+		boolean b = ADB.connect(getTextField().getText());
 		
-		new TextAreaWindow("Uninstall", out, getFrame());
-		getFrame().dispose();
+		if (b) {
+			
+//			gives time for device to authorize
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			new DeviceDisplay(ADB.devices());
+			new TextAreaWindow("Connect to IP", "Connected to " + getTextField().getText(), Gui.frame);
+			getFrame().dispose();
+			Files.refresh();
+			
+		}else {
+			new TextAreaWindow("Connect to IP", "Failed to connect to " + getTextField().getText(), Gui.frame);
+		}
 		
 	}
 	

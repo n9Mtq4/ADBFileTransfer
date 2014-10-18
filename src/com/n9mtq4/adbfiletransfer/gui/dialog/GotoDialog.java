@@ -13,7 +13,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer.dialog;
+package com.n9mtq4.adbfiletransfer.gui.dialog;
 
 import com.n9mtq4.adbfiletransfer.Files;
 
@@ -22,14 +22,11 @@ import javax.swing.*;
 /**
  * Created by Will on 7/4/14.
  */
-public class RenameDialog extends Dialog {
+public class GotoDialog extends Dialog {
 	
-	private String oldFile;
-	
-	public RenameDialog(String oldFile) {
+	public GotoDialog() {
 		
-		super("Rename", "Rename " + oldFile, "Rename", "Cancel");
-		this.oldFile = oldFile;
+		super("Goto Folder", "Enter a path to goto.", "Goto", "Cancel");
 		
 	}
 	
@@ -43,7 +40,13 @@ public class RenameDialog extends Dialog {
 	@Override
 	public void onButtonPress(JButton pressedButton) {
 		
-		Files.rename(oldFile, getTextField().getText());
+		String path = getTextField().getText();
+		if (!path.endsWith("/")) {
+			
+			path = path + "/";
+			
+		}
+		Files.navTo(path);
 		getFrame().dispose();
 		
 	}

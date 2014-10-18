@@ -13,7 +13,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer;
+package com.n9mtq4.adbfiletransfer.gui;
+
+import com.n9mtq4.adbfiletransfer.ADB;
 
 import javax.swing.*;
 import java.awt.*;

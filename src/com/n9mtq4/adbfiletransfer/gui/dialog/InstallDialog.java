@@ -13,12 +13,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer.dialog;
+package com.n9mtq4.adbfiletransfer.gui.dialog;
 
 import com.n9mtq4.adbfiletransfer.ADB;
-import com.n9mtq4.adbfiletransfer.Gui;
-import com.n9mtq4.adbfiletransfer.Message;
-import com.n9mtq4.adbfiletransfer.TextAreaWindow;
+import com.n9mtq4.adbfiletransfer.gui.Gui;
+import com.n9mtq4.adbfiletransfer.gui.Message;
+import com.n9mtq4.adbfiletransfer.gui.TextAreaWindow;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;

@@ -13,25 +13,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.adbfiletransfer;
+package com.n9mtq4.adbfiletransfer.gui.dialog;
 
-import javax.swing.table.DefaultTableModel;
+import com.n9mtq4.adbfiletransfer.Files;
+
+import javax.swing.*;
 
 /**
  * Created by Will on 7/4/14.
  */
-public class FileListModel extends DefaultTableModel {
+public class NewFolderDialog extends Dialog {
 	
-	public FileListModel(Object[][] objects, Object[] objects2) {
+	private String fileP;
+	
+	public NewFolderDialog(String filePath) {
 		
-		super(objects, objects2);
+		super("New Folder", "Enter a New Folder Name", "Create", "Cancel");
+		this.fileP = filePath;
 		
 	}
 	
+	/**
+	 * method is called when confirm button is pressed
+	 * <br>
+	 * NOTE: it is advised you dispose the JFrame (getFrame().dispose();)
+	 *
+	 * @param pressedButton button that is pressed
+	 */
 	@Override
-	public boolean isCellEditable(int row, int column) {
+	public void onButtonPress(JButton pressedButton) {
 		
-		return false;
+		Files.newFolder(fileP, getTextField().getText());
+		getFrame().dispose();
 		
 	}
 	
