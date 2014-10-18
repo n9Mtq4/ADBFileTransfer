@@ -91,7 +91,7 @@ public class Main {
 		if (!Update.isCurrent()) {
 			
 //			available
-			new TextAreaWindow("Update", "There is an update available\nhttps://sites.google.com/site/adbfiletransfer/", Gui.frame);
+			new TextAreaWindow("Update", "There is an update available\nhttps://github.com/n9Mtq4/ADBFileTransfer", Gui.frame);
 			
 		}
 		
