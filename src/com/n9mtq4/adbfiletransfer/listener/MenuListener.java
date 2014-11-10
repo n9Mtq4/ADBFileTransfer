@@ -17,7 +17,6 @@ package com.n9mtq4.adbfiletransfer.listener;
 
 import com.n9mtq4.adbfiletransfer.*;
 import com.n9mtq4.adbfiletransfer.gui.dialog.*;
-import com.n9mtq4.adbfiletransfer.gui.dialog.dialog.*;
 import com.n9mtq4.adbfiletransfer.gui.DeviceDisplay;
 import com.n9mtq4.adbfiletransfer.gui.Gui;
 import com.n9mtq4.adbfiletransfer.gui.Message;
