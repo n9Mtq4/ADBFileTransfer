@@ -85,13 +85,10 @@ public class Main {
 			
 			new Install();
 			
-		}else {
-			
-			Gui.init();
-			
-			new DeviceDisplay(ADB.devices());
-			
 		}
+		
+		Gui.init();
+		new DeviceDisplay(ADB.devices());
 		
 		if (!Update.isCurrent()) {
 			

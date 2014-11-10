@@ -25,7 +25,10 @@ public class Install {
 	
 	public Install() {
 		
-		new TextAreaWindow("Install ADB", "This program requires ADB to be installed and in the run path\n\nPlease install ADB from here\nhttps://developer.android.com/sdk/index.html", null);
+		new TextAreaWindow("Install ADB", "ADB File Transfer has detected that you don't have adb installed\n" +
+				                                  "This may be an error so ADB Files Transfer will starts\n" +
+				                                  "Download, install, and put adb in the run path\n" +
+				                                  "https://developer.android.com/sdk/index.html", null);
 		
 	}
 	
