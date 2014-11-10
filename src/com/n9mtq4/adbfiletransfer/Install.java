@@ -17,6 +17,7 @@ package com.n9mtq4.adbfiletransfer;
 
 import com.n9mtq4.adbfiletransfer.gui.TextAreaWindow;
 import com.n9mtq4.adbfiletransfer.lib.Shell;
+import com.n9mtq4.notification.Notification;
 
 /**
  * Created by Will on 7/5/14.
@@ -29,6 +30,8 @@ public class Install {
 				                                  "This may be an error so ADB Files Transfer will starts\n" +
 				                                  "Download, install, and put adb in the run path\n" +
 				                                  "https://developer.android.com/sdk/index.html", null);
+		Notification n = new Notification("ADB File Transfer", "adb isn't installed");
+		n.display();
 		
 	}
 	
