@@ -27,7 +27,7 @@ import javax.swing.*;
  */
 public class Main {
 	
-	public static int version = 4;
+	public static int version = 5;
 	
 	public static void main(String[] args) {
 		
