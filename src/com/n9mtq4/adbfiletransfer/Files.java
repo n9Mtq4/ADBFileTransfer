@@ -198,6 +198,7 @@ public class Files {
 		
 	}
 	
+//	TODO: does  it work? cache = sub or cache += sub?
 	private static String getLastStringParts(int startIndex, String before) {
 		String cache = before;
 		for (int word = 0; word < startIndex; word++) {
